@@ -63,6 +63,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
     private static final String ERR_API_NOT_SUPPORT = "unsupported tag api";
     private static final String ERR_GET_ACTIVITY_FAIL = "fail to get current activity";
     private static final String ERR_NO_NFC_SUPPORT = "no nfc support";
+    private int FLAG_MUTABLE; //add support for SDK 29,30. Refer: https://github.com/revtel/react-native-nfc-manager/issues/469
 
     class WriteNdefRequest {
         NdefMessage message;
@@ -1067,7 +1068,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
         int flag = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-          flag = PendingIntent.FLAG_MUTABLE;
+          flag = FLAG_MUTABLE;
         }
         return PendingIntent.getActivity(activity, 0, intent, flag);
     }
